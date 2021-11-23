@@ -23,7 +23,7 @@ In this tutorial, we focus on steps 1 and 2 of this process.
 ## Learning objectives
 
 * Internalize the language of data.
-* Load and view a dataset in R and distinguish between various variable types.
+* Load and view a dataset in <a href="https://rguroo.com/">Rguroo</a> and distinguish between various variable types.
 * Classify a study as observational or experimental, and determine whether the study's results can be generalized to the population and whether they suggest correlation or causation between the variables studied.
 * Distinguish between various sampling strategies and recognize the benefits and drawbacks of choosing one strategy over another.
 * Identify the principles of experimental design and recognize their purposes.
@@ -34,10 +34,10 @@ In this tutorial, we focus on steps 1 and 2 of this process.
 
 ### 1 - [Language of data](https://openintro.shinyapps.io/ims-01-data-01/)
 
-* Load data from the textbook companion package
-* Introduce data frames and tidy data
-* Discuss variable types connecting terminology from textbook to R
-* Mutate data frames to convert data types
+* Load data from the textbook companion Rguroo Dataset Repository
+* Introduce data frames and how to navigate datasets ???
+* Discuss variable types connecting terminology from textbook to <a href="https://rguroo.com/">Rguroo</a>
+* Convert data types
   * Numerical to categorical conversion
   * Filtering and then drop levels
   * Combine levels of categorical
@@ -49,26 +49,26 @@ In this tutorial, we focus on steps 1 and 2 of this process.
 * Define observational studies and experiments
 * Discuss scope of inference 2x2 grid with random assignment and sampling
 * Define Simpson's paradox in a 2 cat var case
-  * Use R to make a contingency table
-  * `group_by()` third variable and make table again to demonstrate Simpson's paradox
+  * Use <a href="https://rguroo.com/">Rguroo</a> to make a contingency table
+  * Group by third variable and make table again to demonstrate Simpson's paradox
 
 ### 3 - [Sampling strategies and experimental design](https://openintro.shinyapps.io/ims-01-data-03/)
 
 * Define simple random sample, stratified sample, cluster sample, multistage sample
-* Use R to obtain SRS and stratified sample
+* Use <a href="https://rguroo.com/">Rguroo</a> to obtain SRS and stratified sample
 	* `slice_sample()`
 	* `group_by()` %>% `slice_sample()`
 * Discuss benefits and drawbacks of choosing one sampling scheme over another
 
 * Identify the principles of experimental design 
 * Discuss the purpose of each principle
-* Use R to do random assignment and random assignment after blocking
-	* `slice_sample()`
-	* `group_by()` %>% `slice_sample()`
+* Use <a href="https://rguroo.com/">Rguroo</a> to do random assignment and random assignment after blocking
+	* `slice_sample()` ???
+	* `group_by()` %>% `slice_sample()` ???
 
 ### 4 - [Case study](https://openintro.shinyapps.io/ims-01-data-04/)
 
-* Apply terminology, principles, and R code learned in this tutorial to a case study
+* Apply terminology, principles, and <a href="https://rguroo.com/">Rguroo</a> in this tutorial to a case study
 
 ## Instructor
 
