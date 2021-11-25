@@ -26,7 +26,7 @@ avg_read <- mean(hsb2$read)
 
 Hello, and welcome to **Getting Started with Data**!
 
-In this tutorial we will take you through concepts and R code that are essential for getting started with data analysis.
+In this tutorial we will take you through concepts and <a href="https://rguroo.com/">Rguroo</a> instructions that are essential for getting started with data analysis.
 
 Scientists seek to answer questions using rigorous methods and careful observations. These observations form the backbone of a statistical investigation and are called data. Statistics is the study of how best to collect, analyze, and draw conclusions from data. It is helpful to put statistics in the context of a general process of investigation:
 
@@ -40,64 +40,94 @@ Scientists seek to answer questions using rigorous methods and careful observati
 
 We will focus on **steps 1 and 2** of this process in this tutorial.
 
-Our learning goals for the tutorial are *to internalize the language of data, load and view a dataset in R and distinguish between various variable types, classify a study as observational or experimental, and determine the scope of inference, distinguish between various sampling strategies, and identify the principles of experimental design.*
+Our learning goals for the tutorial are *to internalize the language of data, load and view a dataset in <a href="https://rguroo.com/">Rguroo</a> and distinguish between various variable types, classify a study as observational or experimental, and determine the scope of inference, distinguish between various sampling strategies, and identify the principles of experimental design.*
 
-This tutorial does not assume any previous R experience, but if you would like an introduction to R first, we recommend the [RStudio Primers](https://rstudio.cloud/learn/primers) or the [R Bootcamp](https://r-bootcamp.netlify.com/).
+This tutorial does not assume any previous experience with <a href="https://rguroo.com/">Rguroo</a>, but if you would like an introduction to Rguroo first, we recommend that you start with the [Intoduction to Rguroo](https://openintrostat.github.io/openintro-labs-rguroo/01_intro_to_rguroo/intro_to_rguroo.html) lab of the OpenIntrostat.
 
-## Packages
+## Get Started with Rguroo
 
-Packages are the fundamental units of reproducible R code. 
-They include reusable functions, the documentation that describes how to use them, and sample data.
-In this lesson we will make use of two packages:
+<a href="https://rguroo.com/">Rguroo</a> (read R-guru) is a point-and-click web-application statistical software that facilitates teaching and learning of statistical concepts. You only need the Internet and a browser to use Rguroo; no downloads, installation, or plugins are required. It is platform-independent and runs on tablets too. Rguroo’s computation engine is R. However, no knowledge of R is required to use Rguroo. If you like to get more information about Rguroo and related resources, refer to the Rguroo website https://rguroo.com/.
 
-- **tidyverse**: Tidyverse is a collection of R packages for data science that adhere to a common philosophy of data and R programming syntax, and are designed to work together naturally. You can learn more about tidyverse [here](https://tidyverse.org/). But no need to go digging through the package documentation, we will walk you through what you need to know about these packages as they become relevant. 
-- **openintro**: The openintro package contains datasets used in openintro resources. You can find out more about the package [here](http://openintrostat.github.io/openintro).
+To begin using Rguroo, you need to create a Rguroo account by navigating to the [registration page](https://rguroo.com/register) at https://www.rguroo.com/register. You can find [instructions](https://rguroo.com/AccountCreation.html) for how to register at https://rguroo.com/AccountCreation.html. 
 
-Once we have installed the packages, we use the `library()` function to load 
-packages into R. 
+Upon completing your account registration, a message will be sent to the email address you used to register your Rguroo account, including a temporary password. Follow the instructions in the email to change the temporary password to your password of choice and log in to Rguroo. Once you log in, the Rguroo application page opens, and you should see a page that looks like the figure below. Now you are all set to use Rguroo. 
 
-Let's load these two packages to be used in the remainder of this lesson.
+**Note to Canvas users**: If Rguroo is set up as a tool on your course Canvas, registration or login is not required. You simply click on the Rguroo link on Canvas to open the Rguroo application.
 
-```{r load-packages, exercise=TRUE}
-library(tidyverse)
-library(openintro)
+```{r, out.width='85%', fig.align='center', fig.cap='*The Rguroo Environment*'}
+knitr::include_graphics('images/Rguroo_environment.png')
 ```
 
-## Data in R 
+```
+Register for your Rguroo account and log in to the Rguroo application page.
+```
 
-In this lesson, we'll begin by introducing the terminology of datasets and data frames in R.
+The sidebar on the left of the Rguroo application page consists of five toolboxes: **_Data_**, **_Plots_**, **_Analytics_**, **_Probability-Simulation_**, and **_Applets_**. You can access these toolboxes either by clicking on the toolbox name or via the keyboard shortcuts, by pressing Alt + the second letter of the toolbox name; `Alt + a` for $\it{D\underline{a}ta}$, `Alt + l` for $\it{P\underline{l}ots}$, `Alt + n` for $\it{A\underline{n}alytics}$, `Alt + r` for $\it{P\underline{r}obability-Simulation}$, and `Alt + p` for $\it{A\underline{p}plets}$. Also, a **Quick Access Tools** drop-down on the top right of the Rguroo application page provides access to frequently used functions, such as **Import Dataset**.
+
+Within each toolbox, there are functions that you can use to perform various tasks. Moreover, Rguroo objects, such as data, graphs, and reports, that you have saved are listed in each section. We will give details of how to use each toolbox and its functions in the tutorials that follow.
+
+
+## Data in Rguroo
+
+In this lesson, we'll begin by introducing the terminology of datasets and data frames in Rguroo.
 
 One of the datasets that we will work with in this tutorial comes from the High School and Beyond Survey, which is a survey conducted on high school seniors by the National Center of Education Statistics.
 
 The data are organized in what we call a *data frame*, where each row represents an *observation* or a *case* and each column represents a *variable*. If you ever use spreadsheets, such as a Google sheet or Excel, this representation should be familiar to you.
 
-In this lesson we'll work with the High School and Beyond dataset, stored in the openintro package. The data are stored in a **data frame** called `hsb2`. You can read more about this dataset [here](http://openintrostat.github.io/openintro/reference/hsb2.html). Below is a 
-preview of the dataset. You can use the arrow on the right hand side to scroll 
-through the variables, and the numbers on the bottom to see different rows in 
-the dataset.
+In this lesson, we'll work with the High School and Beyond dataset stored in Rguroo's *Openintro Dataset Repository*. The data are stored in a *data frame* called **_hsb2_**. You can read more about this dataset [here](http://openintrostat.github.io/openintro/reference/hsb2.html). Below is a 
+preview of the **_hsb2_** dataset. The next two sections will show how you can upload this dataset into your Rguroo account (environment) and browse through the data.
 
-```{r print-hsb2}
-hsb2
+```{r, out.width='90%', fig.align='center', fig.cap='*Twenty cases of the hsb2 dataset*'}
+knitr::include_graphics('images/hsb2_data_screenshot.png')
 ```
 
-### Loading data into R
+### Importing data into Rguroo
 
-There are many ways of loading data into R depending on where your data are stored. In this lesson we're using a dataset that is included in an R package so we can access this dataset by loading the package with the `library()` function. Other commonly used formats of data are plain text, comma separated values (CSV), Excel files (XLS or XLSX), or RData (the file format R uses to store data). 
+To work with a dataset in Rguroo, you import or upload it into your Rguroo account, depending on where the dataset is stored. You can *import* a dataset if it is in a Rguroo Dataset Repository or *upload* a dataset if it is stored in your storage medium.  Once you import or upload a dataset into your Rguroo account, it is stored on Rguroo's cloud storage and becomes available for use in all Rguroo functions. In this lesson, we're using a dataset that is included in a Rguroo Dataset Repository. Rguroo consists of several Dataset Repositories, each of which has various datasets that are conveniently accessible in Rguroo. For example, the Rguroo Dataset Repository *Openintro* consists of all the datasets we will use in these tutorials, so you won't need to worry about different ways of loading data into Rguroo. However, learning more about loading data into Rguroo is very important for when you're working on an analysis with your own data.
 
-In many of the tutorials in these series we will use data from existing R packages, so you won't need to worry about the myriad ways of loading data into R. However, learning more about loading data into R is very important for when you're working on an analysis with your own data. A resource we recommend for learning more about importing data into R is the Data Import chapter in [R 4 Data Science](https://r4ds.had.co.nz/data-import.html) by Grolemund and Wickham. 
+Some commonly used formats of data are plain text, comma-separated values (CSV), Excel files (XLS or XLSX), or RData (the file format R uses to store data). Rguroo supports uploading datasets in these formats and a few other formats. To get more information on how to upload data into Rguroo refer to [Chapter 1 of the Rguroo Users's Guide](https://rguroo.com/latest_userguide.pdf?nocache=8twlw#chapter.1), or Rguroo's [Quick Guide](https://rguroo.com/quick_userguide.html#data-import-data-repository) or watch this video [![video icon](images/video_blue_Over.png)](https://youtu.be/f6kvSr89KRw).
+
+You can import datasets from an Rguroo dataset repository into your Rguroo account in a few simple steps. 
+
+---
+
+Log in to your Rguroo account, and use the following steps to import the dataset **_hsb2_** into your Rguroo account (see figure below):
+
+1.	Open the **_Data_** toolbox. 
+2.	Select the Data Import dropdown ![Data Import Dropdown](images/data_import_dropdown.png) and select `Dataset Repository`. The *Repository Dataset Import* dialog opens (see figure below).
+3.	In the Search Repository box, type $\color{darkblue}{\tt{open}}$. The `OpenIntro` repository's name appears on the top panel. 
+4.	Select the `OpenIntro` repository on the upper panel. The names of the dataset in the repository appear in the lower panel. 
+5.	In the lower panel, select **_hsb2_** from the list of datasets.
+6.	Click on the `Import` button. You will see a pop-up window confirming that the dataset has been imported successfully.
+7. Click the `Ok` button on the pop-up window. You will see the name of the dataset (**_hsb2_**) on the list under the Data toolbox.
+8.	Click the `Close` button to close the *Repository Dataset Import* dialog.
+
+Now you have the **_hsb2_** in your Rguroo account!
+
+```{r, out.width='90%', fig.align='center', fig.cap='*Rguroo dialogs to import datasets from Rguroo Dataset Repository*'}
+knitr::include_graphics('images/dataset_import_dialog.png')
+```
+
+---
 
 ### Take a peek
 
-When you want to work with data in R, a good first step is to take a peek at what
-the data look like. The `glimpse()` function is one good way of doing this. Click 
+When you want to work with data in Rguroo, a good first step is to take a peek at what
+the data look like. Double-click on the name of the dataset **_hsb2_** that appears under the **_Data_** section. This opens the Rguroo Data Viewer, as shown below.
+
+```{r, out.width='90%', fig.align='center', fig.cap='*Rguroo Data Viewer, showing 17 cases of hsb2 dataset*'}
+knitr::include_graphics('images/Rguroo_data_viewer.png')
+```
+
+The names of the variables (columns) in the dataset are shown on the top row of the Data Viewer.  Moreover, at the bottom of the Viewer, you can see that the **_hsb2_** dataset has 200 observations (rows) and 11 variables (columns). You can use the text boxes and the buttons at the bottom of the Viewer to navigate to different rows and columns of the data. By default, rows 1 to 100 of the 200 rows are shown. To see specific rows, type in the values of your desired range in the `Row` and `To` text boxes, and click on the refresh button ![refresh button](images/refresh_page.png). 
+Similarly, type in values in the `Column` and `To` text boxes and click on the refresh button ![refresh button](images/refresh_page.png) to see your desired columns.
+You can also navigate the data page-wise by using the right and left arrows shown.
+
+The `glimpse()` function is one good way of doing this. Click 
 on the blue "Run Code" button to run the code below, and take a look at the 
 output of the `glimpse()` function. 
 
-```{r glimpse-hsb2, exercise=TRUE}
-glimpse(hsb2)
-```
-
-The output of `glimpse()` tells us that the data frame includes 200 observations (rows) and 11 variables (columns). It also lists the variables and their types, along with values of the first few observations.
 
 Now let's put what you've learned so far to use!
 
