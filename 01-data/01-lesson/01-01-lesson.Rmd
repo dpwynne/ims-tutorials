@@ -75,8 +75,8 @@ One of the datasets that we will work with in this tutorial comes from the High 
 
 The data are organized in what we call a *data frame*, where each row represents an *observation* or a *case* and each column represents a *variable*. If you ever use spreadsheets, such as a Google sheet or Excel, this representation should be familiar to you.
 
-In this lesson, we'll work with the High School and Beyond dataset stored in Rguroo's *Openintro Dataset Repository*. The data are stored in a *data frame* called **_hsb2_**. You can read more about this dataset [here](http://openintrostat.github.io/openintro/reference/hsb2.html). Below is a 
-preview of the **_hsb2_** dataset. The next two sections will show how you can upload this dataset into your Rguroo account (environment) and browse through the data.
+In this lesson, we'll work with the High School and Beyond dataset stored in Rguroo's *Openintro Dataset Repository*. The data are stored in a *data frame* called `hsb2`. You can read more about this dataset [here](http://openintrostat.github.io/openintro/reference/hsb2.html). Below is a 
+preview of the `hsb2` dataset. The next two sections will show how you can upload this dataset into your Rguroo account (environment) and browse through the data.
 
 ```{r, out.width='90%', fig.align='center', fig.cap='*Twenty cases of the hsb2 dataset*'}
 knitr::include_graphics('images/hsb2_data_screenshot.png')
@@ -92,18 +92,18 @@ You can import datasets from an Rguroo dataset repository into your Rguroo accou
 
 ---
 
-Log in to your Rguroo account, and use the following steps to import the dataset **_hsb2_** into your Rguroo account (see figure below):
+Log in to your Rguroo account, and use the following steps to import the dataset `hsb2` into your Rguroo account (see figure below):
 
 1.	Open the **_Data_** toolbox. 
 2.	Select the Data Import dropdown ![Data Import Dropdown](images/data_import_dropdown.png) and select `Dataset Repository`. The *Repository Dataset Import* dialog opens (see figure below).
 3.	In the Search Repository box, type $\color{darkblue}{\tt{open}}$. The `OpenIntro` repository's name appears on the top panel. 
 4.	Select the `OpenIntro` repository on the upper panel. The names of the dataset in the repository appear in the lower panel. 
-5.	In the lower panel, select **_hsb2_** from the list of datasets.
+5.	In the lower panel, select `hsb2` from the list of datasets.
 6.	Click on the `Import` button. You will see a pop-up window confirming that the dataset has been imported successfully.
-7. Click the `Ok` button on the pop-up window. You will see the name of the dataset (**_hsb2_**) on the list under the Data toolbox.
+7. Click the `Ok` button on the pop-up window. You will see the name of the dataset (`hsb2`) on the list under the Data toolbox.
 8.	Click the `Close` button to close the *Repository Dataset Import* dialog.
 
-Now you have the **_hsb2_** in your Rguroo account!
+Now you have the `hsb2` in your Rguroo account!
 
 ```{r, out.width='90%', fig.align='center', fig.cap='*Rguroo dialogs to import datasets from Rguroo Dataset Repository*'}
 knitr::include_graphics('images/dataset_import_dialog.png')
@@ -114,50 +114,38 @@ knitr::include_graphics('images/dataset_import_dialog.png')
 ### Take a peek
 
 When you want to work with data in Rguroo, a good first step is to take a peek at what
-the data look like. Double-click on the name of the dataset **_hsb2_** that appears under the **_Data_** section. This opens the Rguroo Data Viewer, as shown below.
+the data look like. Double-click on the name of the dataset `hsb2` that appears under the **_Data_** section. This opens the Rguroo **Data Viewer**, as shown below.
 
 ```{r, out.width='90%', fig.align='center', fig.cap='*Rguroo Data Viewer, showing 17 cases of hsb2 dataset*'}
 knitr::include_graphics('images/Rguroo_data_viewer.png')
 ```
 
-The names of the variables (columns) in the dataset are shown on the top row of the Data Viewer.  Moreover, at the bottom of the Viewer, you can see that the **_hsb2_** dataset has 200 observations (rows) and 11 variables (columns). You can use the text boxes and the buttons at the bottom of the Viewer to navigate to different rows and columns of the data. By default, rows 1 to 100 of the 200 rows are shown. To see specific rows, type in the values of your desired range in the `Row` and `To` text boxes, and click on the refresh button ![refresh button](images/refresh_page.png). 
+The names of the variables (columns) in the dataset are shown on the top row of the **Data Viewer**.  Moreover, at the bottom of the Viewer, you can see that the `hsb2` dataset has 200 observations (rows) and 11 variables (columns). You can use the text boxes and the buttons at the bottom of the Viewer to navigate to different rows and columns of the data. By default, rows 1 to 100 of the 200 rows are shown. To see specific rows, type in the values of your desired range in the `Row` and `To` text boxes, and click on the refresh button ![refresh button](images/refresh_page.png). 
 Similarly, type in values in the `Column` and `To` text boxes and click on the refresh button ![refresh button](images/refresh_page.png) to see your desired columns.
 You can also navigate the data page-wise by using the right and left arrows shown.
-
-The `glimpse()` function is one good way of doing this. Click 
-on the blue "Run Code" button to run the code below, and take a look at the 
-output of the `glimpse()` function. 
 
 
 Now let's put what you've learned so far to use!
 
 ### 
 
-Next, we'll practice on another dataset, `email50`, which contains a subset of incoming emails for the first three months of 2012 for a single email account. We'll examine the structure of this dataset and determine the number of rows (observations) and columns (variables).
+Next, we’ll practice on another dataset, `email50`, which contains a subset of incoming emails for a single email account for the first three months of 2012.  We'll examine the structure of this dataset and determine the number of rows (observations) and columns (variables).
 
-Take a peek at the `email50` dataset using the `glimpse()` function. 
+Import the `email50` from Rguroo's *OpenIntro* Dataset Repository, and then take a peek at the `email50` dataset using Rguroo's **Data Viewer**. 
 
 *How many observations and variables are there?*
 
-```{r glimpse-email50, exercise=TRUE}
-
-```
-
-```{r glimpse-email50-solution}
-glimpse(email50)
-```
-
 ## Types of variables
 
-When you first start working with a dataset, it's good practice to take a note of its dimensions; how many rows or observations and how many columns or variables the data frame has.
+When you first start working with a dataset, it's good practice to take a note of its dimensions; how many rows or observations, and how many columns or variables the data frame has.
 
-You learned how to do this in the previous section using the `glimpse()` function. You also learned how to take a quick look at the list of variables in the dataset. In this section, we will delve deeper into the categorization of variables as **numerical and categorical**. This is an important step, as the type of variable helps us determine what summary statistics to calculate, what type of visualizations to make, and what statistical method will be appropriate to answer the research questions we're exploring.
+You learned how to do this in the previous section using Rguroo's **Data Viewer**. You also learned how to take a quick look at the list of variables in the dataset. In this section, we will delve deeper into the categorization of variables as **numerical and categorical**. This is an important step, as the type of variable helps us determine what summary statistics to calculate, what type of visualizations to make, and what statistical method will be appropriate to answer the research questions we're exploring.
 
 There are two types of variables: numerical and categorical.
 
-- **Numerical**, in other words, quantitative, variables take on numerical values. It is sensible to add, subtract, take averages, and so on, with these values.
+- **Numerical**, in other words, quantitative variables take on numerical values. It is sensible to add, subtract, take averages, and so on, with these values.
 
-- **Categorical**, or qualitative, variables, take on a limited number of distinct categories. These categories can be identified with numbers, for example, it is customary to see likert variables (strongly agree to strongly disagree) coded as 1 through 5, but it wouldn't be sensible to do arithmetic operations with these values. They are merely placeholders for the levels of the categorical variable.
+- **Categorical**, or qualitative, variables take on a limited number of distinct categories. These categories can be identified with numbers. For example, it is customary to use Likert variables (strongly agree to strongly disagree) coded as 1 through 5, but it wouldn't be sensible to do arithmetic operations with these values. They are merely placeholders for the levels of the categorical variable.
 
 ### Numerical data
 
@@ -165,110 +153,74 @@ Numerical variables can be further categorized as **continuous or discrete**.
 
 - **Continuous numerical** variables are usually measured, such as height. These variables can take on an infinite number of values within a given range.
 
-- **Discrete numerical** variables are those that take on one of a specific set of numeric values where we are able to count or enumerate all of the possibilities. One example of a discrete variable is number of pets in a household. In general, count data are an example of discrete variables.
+- **Discrete numerical** variables are those that take on one of a specific set of numeric values where we are able to count or enumerate all of the possibilities. One example of a discrete variable is the number of pets in a household. In general, count data are an example of discrete variables.
 
-When determining whether a numerical variable is continuous or discrete, it is important to think about the nature of the variable and not just the observed value, as rounding of continuous variables can make them appear to be discrete. For example, height is a continuous variable, however we tend to report our height rounded to the nearest unit of measure, like inches or centimeters.
+When determining whether a numerical variable is continuous or discrete, it is important to think about the nature of the variable and not just the observed value, as rounding of continuous variables can make them appear to be discrete. For example, height is a continuous variable. However, we tend to report our height rounded to the nearest unit of measure, like inches or centimeters.
 
 ### Categorical data
 
 Categorical variables that have ordered levels are called **ordinal**.
 
-Think about a survey question where you're asked how satisfied you are with the customer service you received and the options are very unsatisfied, unsatisfied, neutral, satisfied, and very satisfied. These levels have an inherent ordering, hence the variable would be called ordinal.
+Think about a survey question where you're asked how satisfied you are with the customer service you received, and the options are very unsatisfied, unsatisfied, neutral, satisfied, and very satisfied. These levels have an inherent ordering. Hence the variable would be called ordinal.
 
 If the levels of a categorical variable do not have an inherent ordering to them, then the variable is simply called categorical. For example, do you consume caffeine or not?
 
+Another special type of categorical variable is called **Label/ID**. Values of a Label/ID variable identify each case uniquely. For example, social security numbers of participants in a study.
+
 ### Variables in `hsb2`
 
-Let's take a moment to go through the variables in the High School and Beyond dataset:
+Let's take a moment to go through the variables in the High School and Beyond dataset. Rguroo internally divides variables into two types of categorical and numerical. To get information about the variables in a dataset, we right-click on the dataset name, and in the context menu that appears, you select `Dataset Summary`. The figure below shows the context menu that appears when we right-click on the dataset name `hsb2`. 
 
-```{r glimpse-hsb2-again, echo=TRUE}
-glimpse(hsb2)
+
+```{r, out.width='80%', fig.align='center', fig.cap='*Rguroo\'s dataset context menu includes the Dataset Summary function*'}
+knitr::include_graphics('images/Dataset_summary.png')
 ```
 
-Using the `glimpse()` function, we can obtain a list of the variables in the dataset and also see what the values stored in these variables look like.
+The following is Rguroo's dataset summary for the `hsb2` data. It separates numerical variables from categorical variables.
 
-The first variable is id, which is an identifier variable for the student. 
-
-```{r glimpse-hsb2-id}
-hsb2 %>% 
-  select(id) %>% 
-  glimpse()
+```{r, out.width='100%', fig.align='center', fig.cap='*Rguroo\'s dataset summary report for the hsb2 data*'}
+knitr::include_graphics('images/summary_hsb2.png')
 ```
 
-Strictly speaking, this is a categorical variable, though the labeling of this variable is likely not that useful since we would not use this variable in an analysis of relationships between the variables in the dataset. You can think of this variable as being an anonymized version to 
-having the names of the students in the dataset.
+The first variable in the Numerical Variables list is *id*, which is an identifier variable for the student. Strictly speaking, this is a categorical variable (ID/Label variable), though the labeling of this variable is likely not that useful since we would not use this variable in an analysis of relationships between the variables in the dataset. You can think of this variable as an anonymized version of having the students' names in the dataset.
 
-The next variable is gender, a categorical variable, with levels `"male"` and
-`"female"`. It should be noted that the language of government surveys, such as
-High School and Beyond, is slow to change. So with these types of data, you will
-continue to see variables mislabeled as "gender" when they in fact measure the
-biological sex (male, female) of the participant.  
+The remaining variables are scores that these students received in reading, writing, math, science, and social studies tests. Since these scores are all whole numbers, and assuming that it is not possible to obtain a non-whole number score on these tests, these variables are discrete numerical. The report also consists of other information, such as the number of observed values, the number of missing values, and various summary statistics that we will discuss later.
+
+The first variable in the Categorical Variables list is *gender* with levels `"male"` and
+`"female"`. It is also shown that there are 109 females and 91 males in the dataset. It should be noted that the language of government surveys, such as
+High School and Beyond, is slow to change. So with these types of data, you will continue to see variables mislabeled as "gender" when they, in fact, measure the participant's biological sex (male, female). 
 
 There is no inherent ordering to the levels of this variable, no matter what
-anyone tells you! So, this is just a categorical variable.The same is true for
-the race variable, which has levels of `"white"`, `"african american"`,
+anyone tells you! So, this is just a categorical variable. The same is true for
+the *race* variable, which has levels of `"white"`, `"african american"`,
 `"hispanic"`, and `"asian"`.
 
-```{r glimpse-hsb2-race-gender}
-hsb2 %>% 
-  select(race, gender) %>% 
-  glimpse()
-```
-
-Socio-economic status, on the other hand, has three levels `"low"`, `"middle"`,
+Socio-economic status (*ses*), on the other hand, has three levels `"low"`, `"middle"`,
 and `"high"` that have an inherent ordering, hence this variable is an *ordinal*
 categorical variable.
 
-```{r glimpse-hsb2-ses}
-hsb2 %>% 
-  select(ses) %>% 
-  glimpse()
-```
+School type (*schtyp*) and program (*prog*) are also both categorical variables, with no inherent ordering to their levels.
 
-School type and program are also both categorical variables, with no inherent ordering to their levels.
-
-```{r glimpse-hsb2-schtyp-prog}
-hsb2 %>% 
-  select(schtyp, prog) %>% 
-  glimpse()
-```
-
-The remaining variables are scores that these students received in reading, writing, math, science, and social studies tests. Since these scores are all whole numbers, and assuming that it is not possible to obtain a non-whole number score on these tests, these variables are discrete numerical.
-
-Next we will practice identifying variables in a different dataset.
+Next, we will practice identifying variables in a different dataset.
 
 ###  
 
-Recall that the `glimpse()` function tells us the number of observations and variables in a dataset as well as the names and types of each column, along with a neatly printed preview of their first few values.
+Recall that the **Dataset Summary**  function, available via the context menu for each dataset, gives a summary of numerical and categorical variables in a dataset. 
 
-Let's have another look at the `email50` data, so we can practice identifying variable types.
+Let's have another look at the `email50` data, so we can practice identifying variable types. 
 
-Use the `glimpse()` function to view the variables in the `email50` dataset.
-
-Remember that variable descriptions are available in the help file for the dataset, which we can access by typing `?email50` (that is, type a question mark followed by the name of the
-dataset) in the code box and running it.
+Use the **Dataset Summary** function to view the variables in the `email50` dataset. For a description of the variables in the `email50` dataset, click [here](https://www.openintro.org/data/index.php?data=email50).
 
 *Review the output to identify each variable as either numerical or categorical, and further as discrete or continuous (if numerical) or ordinal or not ordinal (if categorical).*
 
-```{r glimpse-data, exercise=TRUE}
+[comment]: # (Mori has done up to here)
+## Categorical data in Rguroo: factors
 
-```
-
-```{r glimpse-data-hint}
-glimpse(___)
-```
-
-```{r glimpse-data-solution}
-glimpse(email50)
-```
-
-## Categorical data in R: factors
-
-There are various data classes in R. In this tutorial, we'll focus on ones that are relevant to the concepts we will introduce. One of these classes is a factor, which is what R often stores categorical variables as. An important use of factors is in statistical modeling, since categorical variables enter into models differently than numerical variables. We'll learn more about what this difference is in a later tutorial, but for now just keep in mind that while factors might crop up in places where they're not actually helpful, there are also many places where they are essential to running a statistical analysis correctly.
+There are various data classes within Rguroo, and hence in Rguroo. In this tutorial, we'll focus on ones that are relevant to the concepts we will introduce. One of these classes is a factor, which is what Rguroo often stores categorical variables as. An important use of factors is in statistical modeling, since categorical variables enter into models differently than numerical variables. We'll learn more about what this difference is in a later tutorial, but for now just keep in mind that while factors might crop up in places where they're not actually helpful, there are also many places where they are essential to running a statistical analysis correctly.
 
 ### Categorical Data
 
-- Often stored as factor in R
+- Referred to as factor in Rguroo
   + Important use: statistical modeling
   + Sometimes undesirable, sometimes essential
 - Common in subgroup analysis
