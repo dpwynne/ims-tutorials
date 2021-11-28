@@ -95,21 +95,28 @@ You can import datasets from an Rguroo dataset repository into your Rguroo accou
 Log in to your Rguroo account, and use the following steps to import the dataset `hsb2` into your Rguroo account (see figure below):
 
 1.	Open the **_Data_** toolbox. 
-2.	Select the Data Import dropdown ![Data Import Dropdown](images/data_import_dropdown.png) and select `Dataset Repository`. The *Repository Dataset Import* dialog opens (see figure below).
-3.	In the Search Repository box, type $\color{darkblue}{\tt{open}}$. The `OpenIntro` repository's name appears on the top panel. 
-4.	Select the `OpenIntro` repository on the upper panel. The names of the dataset in the repository appear in the lower panel. 
-5.	In the lower panel, select `hsb2` from the list of datasets.
-6.	Click on the `Import` button. You will see a pop-up window confirming that the dataset has been imported successfully.
-7. Click the `Ok` button on the pop-up window. You will see the name of the dataset (`hsb2`) on the list under the Data toolbox.
-8.	Click the `Close` button to close the *Repository Dataset Import* dialog.
 
-Now you have the `hsb2` in your Rguroo account!
+2.	Select the Data Import dropdown ![Data Import Dropdown](images/data_import_dropdown.png) and select `Dataset Repository`. The *Repository Dataset Import* dialog opens (see figure below).
+
+3.	In the Search Repository box, type $\color{darkblue}{\tt{open}}$. The `OpenIntro` repository's name appears on the top panel. 
+
+4.	Select the `OpenIntro` repository on the upper panel. The names of the dataset in the repository appear in the lower panel. 
+
+5.	In the lower panel, select `hsb2` from the list of datasets.
+
+6.	Click on the `Import` button. You will see a pop-up window confirming that the dataset has been imported successfully.
+
+7. Click the `Ok` button on the pop-up window. You will see the name of the dataset (`hsb2`) on the list under the Data toolbox.
+
+8.	Click the `Close` button to close the *Repository Dataset Import* dialog.
 
 ```{r, out.width='90%', fig.align='center', fig.cap='*Rguroo dialogs to import datasets from Rguroo Dataset Repository*'}
 knitr::include_graphics('images/dataset_import_dialog.png')
 ```
 
 ---
+
+Now you have the `hsb2` in your Rguroo account!
 
 ### Take a peek
 
@@ -213,10 +220,9 @@ Use the **Dataset Summary** function to view the variables in the `email50` data
 
 *Review the output to identify each variable as either numerical or categorical, and further as discrete or continuous (if numerical) or ordinal or not ordinal (if categorical).*
 
-[comment]: # (Mori has done up to here)
 ## Categorical data in Rguroo: factors
 
-There are various data classes within Rguroo, and hence in Rguroo. In this tutorial, we'll focus on ones that are relevant to the concepts we will introduce. One of these classes is a factor, which is what Rguroo often stores categorical variables as. An important use of factors is in statistical modeling, since categorical variables enter into models differently than numerical variables. We'll learn more about what this difference is in a later tutorial, but for now just keep in mind that while factors might crop up in places where they're not actually helpful, there are also many places where they are essential to running a statistical analysis correctly.
+There are various data classes in R, and hence within Rguroo. In this tutorial, we'll focus on ones that are relevant to the concepts we will introduce. One of these classes is a factor, which is what Rguroo often stores categorical variables as. An important use of factors is in statistical modeling, since categorical variables enter into models differently than numerical variables. We'll learn more about what this difference is in a later tutorial, but for now just keep in mind that while factors might crop up in places where they're not actually helpful, there are also many places where they are essential to running a statistical analysis correctly.
 
 ### Categorical Data
 
@@ -227,199 +233,114 @@ There are various data classes within Rguroo, and hence in Rguroo. In this tutor
   + Only interested in a subset of the data
   + Filter for specific levels (values) of categorical variable
 
-A common step in many analyses that involve categorical data is a subgroup analysis, where we work with only a subset of the data. For example, analyzing data only from students in public schools or only for students who identified as female. We can obtain these subsets by filtering for the specific levels we're interested in.
+A common step in many analyses that involve categorical data is a subgroup analysis, where we work with only a subset of the data. For example, analyzing data only from students in public schools or only for students who identified as female. We can obtain subsets of data by filtering for the specific levels we're interested in. In Rguroo, you can filter data using the **Subset** function in the **_Data_** toolbox. We will show how to use the **Subset** function momentarily. Another option for filtering factor variables is to use Rguroo’s **Level Editor** that exists in each function. We will explain the use of **Level Editor** in later sections. 
 
-Suppose we want to do an analysis of only the students in public schools in the High School and Beyond dataset. Let's first find out how many such students there are.
+Now, suppose we want to do an analysis of only the students in public schools in the High School and Beyond dataset. To do so, we can create a subset of the data to filter only public school cases. As we saw in Rguroo's summary statistic report, there are 168 students in public schools and 32 in private schools. Let's see how we can get the subset of 168 students in a separate dataset.
 
-One option for obtaining this information in R uses the `count()` function from the **dplyr** package, one of the packages included in the tidyverse. This package provides a variety of functions for wrangling and summarizing data. Once such function is `count()` which gives the frequencies of occurrence of the unique values in a given column. In this case we're interested in the number of students for each level of the `schtyp` (school type) column.
+## Rguroo's Subset function
 
-```{r hsb2-count-schtyp, exercise=TRUE}
-hsb2 %>% 
-  count(schtyp)
+The figure below shows dialog boxes for Rguroo's **Subset** function. Use the following steps to obtain the subset of students who attend public schools in the `hsb2` dataset.
+
+---
+
+1. Open the **_Data_** toolbox and click on the **Functions** dropdown ![functions dropdown](images/functions_dropdown.png).
+
+2. Select `Subset` from the dropdown menu. This opens the **Data Subset** dialog.
+
+3. From the `Dataset` dropdown select `hsb2`.
+
+4. In the Row Selection section of the dialog, click on `Logical Expression`. The **Logical Expression Creator** dialog opens.
+
+5. Using the **Logical Expression Creator** dialog, create a logical expression by clicking on the plus sign ![plus sign](images/add.png) to add an expression that specifies the public school type.
+
+6. Create the expression as follows:   
+  6.1 Under the `Variable` column, select the variable `schtyp`.  
+  6.2 Under the `Op.` column select the operation `==`.  
+  6.3 Under the `Value` column select the level `Public`.  
+  
+7. Click `Done`. This closes the **Logical Expression Creator**.
+
+8. Click the Preview button ![preview button](images/preview.png).
+
+---
+
+```{r, out.width='100%', fig.align='center', fig.cap='*Using Rguroo\'s Subset function to filter public school students in the hsb2 dataset*'}
+knitr::include_graphics('images/subset_function.png')
 ```
 
-There are 168 students in public schools and 32 in private schools.
+You should see a dataset that appears in Rguroo's **Data Viewer**. This dataset includes students only from public schools. Note that the logical expression creator is used to specify logical expressions that indicate which subset of the data we are interested in. We created the logical expression `schtyp == "public"`, which results in the subset of the data for which the variable `schtyp` is equal to `public`.
 
-Let's pause for a moment and dissect what happened in these two lines of code.
+Once the data subset appears in Rguroo's **Data Viewer**, you can save it by typing a name in the `Save As` text box. Let's save the new dataset using the name `hsb2_public`.
 
-We can read the code as: "take the `hsb2` data frame and **pipe it** into the
-`count()` function, then `count()` the occurrences of unique values in the 
-`schtyp` variable."
-
-You might be wondering what we mean by _"pipe it into the `count()` function"_?
-
-### The pipe operator
-
-![](images/pipe-operator.png){width="30%"}
-
-The **pipe operator**, which **is percent greater than percent**, tells `R` to
-pass the object that comes before it into the first argument of the function
-that comes after it. Mathematically, **x pipe f(y)** becomes *f(x, y)*, since x
-is piped into the first argument of the function f().
-
-![](images/pipe-operator2.png){width="30%"}
-
-For example, one way of adding numbers in R is using the `sum()` function. The 
-`sum()` function has as many arguments as there are numbers you wish to add, 
-where each number is separated with a comma. For example, to add 3 and 4, we 
-would use the following code. Notice, 3 and 4 are separated by a comma, 
-indicating that these are the two numbers we wish for the `sum()` function to 
-add. 
-
-```{r sumdata1, echo=TRUE}
-# Sum of 3 and 4, without pipe
-sum(3, 4)
+```{r, out.width='75%', fig.align='center', fig.cap='Textbox for saving output of the Subset function'}
+knitr::include_graphics('images/save_as.png')
 ```
 
-If we wanted to do the same operation with a pipe, we would instead use the
-code below. The pipe operator inserts 3 as the first argument into the `sum()`
-function, which looks like `sum(3, 4)`. 
+If you uncheck the `Save Parameters` checkbox, the dataset gets saved as an independent dataset, leaving no trace of how it was created. However, if you check the checkbox and save the data, then not only will you have access to the created dataset, but you can also access the **Subset** dialog that you used to create it as you left it last, even if you log out and log back in. To get the dialog box back, you simply double-click on the name, in this case `hsb2_public`, that is in your list of Rguroo datasets.
 
-```{r sumdata2, echo=TRUE}
-# Sum of 3 and 4, with pipe
-3 %>% sum(4)
-```
+It is good to know that every result that is obtained after you click the preview button ![preview button](images/preview.png) in Rguroo can be saved, accessed, and modified at any time. That is, all of your work in Rguroo is reproducible.
 
-Piping 3 into the `sum()` function may seem a bit silly, especially since it's 
-not much easier than typing `sum(3,4)`. However, as we progress through these 
-tutorials you will see that the piping operator will allow us to sequentially
-link together data wrangling operations. This can save us a great deal of 
-headache later on, as the format of operations that use the pipe are far simpler 
-to read! We'll start with short pipes and throughout the tutorial build up to
-longer pipes that perform multiple operations.
-
-Next, let's use the `filter()` function to filter the data to only include
-public school students. 
-
-```{r hsb2-filter-schtyp-public, exercise=TRUE}
-hsb2_public <- hsb2 %>%
-  filter(schtyp == "public")
-```
-
-We can read the above code as: "take the `hsb2` data frame and **pipe it** into
-the `filter()` function. Next, `filter()` the data **for cases where school type
-is equal to public**. Then, **assign the resulting data frame** to a new data 
-frame called **hsb2 underscore public**."
-
-We should take note of two pieces of R syntax: *the double equal sign* (`==`) 
-and quotations (""). In R, `==` is a logical test for *"is equal to"*. `R` uses
-this logical test to search for observations (rows) in the data frame where
-school type is equal to public, and returns a data frame where this
-comparison is `TRUE` for every row. 
-
-In R, variables that are categorical use characters (rather than numbers) for
-values. To indicate to R that you want 
-your logical test to compare the values of a categorical variable to a specific
-level of that variable, you need to surround the name of the level in quotations
-(e.g. `schtyp == "public"`). The quotations tell R that the value of the variable 
-is a character, not a number. If you forget to use quotations, R will give you 
-an error message!
-
-Now, if we make another frequency table of school type in the filtered dataset,
-we should only see public school in the output.
-
-```{r hsb2-count-schtyp-again, exercise=TRUE}
-hsb2_public %>%
-  count(schtyp)
-```
-
-Now we will practice filtering and handling factors with a different categorical variable.
 
 ### Filtering based on a factor
 
-Categorical data are often stored as factors in R. Next, we'll practice working with a factor variable, `number`, from the `email50` dataset. This variable tells us what type of number (none, small, or big) an email contains.
+Categorical data are stored as factors in Rguroo. Next, we'll practice working with a factor variable, `number`, from the `email50` dataset. This variable tells us what type of number (none, small, or big) an email contains.
 
-Modify the code below to: 
+Use Rguroo's **Subset** function to: 
 
 - Create a new dataset called `email50_big` that is a subset of the original `email50` dataset containing only emails with `"big"` numbers. This information is stored in the `number` variable.
-- Report the dimensions of `email50_big` using the `glimpse()` function again. *How many emails contain big numbers?*
-
-```{r email50-filter-number-big, exercise=TRUE}
-# Subset of emails with big numbers: email50_big
-email50_big <- ___ %>%
-  filter(___)
-
-# Glimpse the subset 
-
-```
-
-
-```{r email50-filter-number-big-hint-1}
-# We're looking for emails with big numbers, so filter for `number == "big"`.
-```
-
-```{r email50-filter-number-big-hint-2}
-# Subset of emails with big numbers: email50_big
-email50_big <- email50 %>%
-  filter(number == "big")
-```
-
-```{r email50-filter-number-big-solution}
-# Subset of emails with big numbers: email50_big
-email50_big <- email50 %>%
-  filter(number == "big")
-
-# Glimpse the subset
-glimpse(email50_big)
-```
+- Report the dimensions of `email50_big` using the information given in Rguroo's **Data Viewer**. *How many emails contain big numbers?*
 
 ## Discretize variables
 
-A common way of creating a new variable from an existing variable is discretizing, that is converting a numerical variable to a categorical variable based on certain criteria.
+A common way of creating a new variable from an existing variable is discretizing, that is, converting a numerical variable to a categorical variable based on certain criteria.
 
-For example, suppose we are not interested in the actual reading score of students, but instead whether their reading score is below average or at or above average. First, we need to calculate the average reading score with the `mean()` function. This will give us the mean value, 52.23. 
+For example, suppose we are not interested in the actual reading score of students, but instead whether their reading score is below average or at or above average. Recall that the mean value for the reading score, shown in Rguroo's Data Summary, was 52.23. We will use the **Transform** function in the **_Data_** toolbox to do this discretization. In Rguroo's **Transform** function, you can write and run R code. As you will see, we won't need to remember the value 52.23 since we will compute it in the **Transform** function using R's `mean()` function.
 
-```{r hsb2-mean-read, exercise=TRUE}
-# Calculate average reading score and show the value
-mean(hsb2$read)
-```
-However, in order to be able to refer back to this value later on, we might want to store it as an object that we can refer to by name. So instead of just printing the result, let's save it as a new object called **avg underscore read**.
-
-```{r hsb2-mean-read-assign, exercise=TRUE}
-# Calculate average reading score and store as avg_read
-avg_read <- mean(hsb2$read)
-```
-
-Before we move on, a quick tip: most often we want to do both; see the value and also store it for later use. The approach we used here, running the `mean()` function twice, is redundant. A less redundant 
-way to accomplish this task is to wrap your assignment code in parentheses so that R will both assign the average value of reading test scores to `avg_read`, and print out the value assigned to 
-`avg_read`. 
-
-```{r hsb2-mean-read-assign-show, exercise=TRUE}
-(avg_read <- mean(hsb2$read))
-```
-
-Next, in order to create the two groups of interest, we need to determine whether each student is either (1) below or (2) at or above average. For example, a reading score of 57 is above average, so is 68, but 44 is below. Obviously, going through each record like this would be tedious and error prone, so 
-let's explore another option! 
+In order to create the two groups of interest, we need to determine whether each student is either (1) below or (2) at or above average. For example, a reading score of 57 is above average, so is 68, but 44 is below. Obviously, going through each record like this would be tedious and error-prone, so let's explore another option! 
 
 ### New variable: `read_cat`
 
 ![](images/new-variable-read-cat.png){width="50%"}
 
-Instead we can create a new variable, named `read_cat`, with the `mutate()`
-function and the helpful `if_else()` function. 
+Instead, we can create a new variable, named `read_cat`, in Rguroo's **Transform** function and with the help of the  `ifelse()` function. Use the following steps to create the `read_cat` variable:
 
-```{r hsb2-mutate-read-cat, exercise=TRUE}
-hsb2 <- hsb2 %>%
-  mutate(read_cat = if_else(read < avg_read,
-                            "below average",
-                            "at or above average")
-         )
+---
 
-hsb2
+1. Open the **_Data_** toolbox and click on the **Functions** dropdown ![functions dropdown](images/functions_dropdown.png).
+
+2. Select `Transform` from the dropdown menu. This opens the **Data Transform** dialog (see figure below).
+
+3. From the `Dataset` dropdown select `hsb2`.
+
+4. Click the plus sign ![plus sign](images/add.png) on the `Variable` column to add a variable. A textbox appears. Type in the variable name $\color{darkblue}{\tt{read\_cat}}$. The variable name `read_cat` shows up on the `Returned Variable` column. On the `Returned Variable` column you can rearrange the order of the variables to whatever order you like using drag-and-drop. As shown in the figure below, we placed `read_cat` after the `id` variable, and the `read` variable after `read_cat`. 
+
+5. In the middle panel, type in the following R code (see figure below):
+$\color{darkblue}{\tt{
+avg\_read = mean(read)\\
+ifelse(read < avg\_read, "below\ average", "at\ or\ above\ average")
+}}$
+6. Click the Preview button ![preview button](images/preview.png).
+
+---
+
+```{r, out.width='80%', fig.align='center', fig.cap='*Using Rguroo\'s Data Transfor function to discretize the "read" variable*'}
+knitr::include_graphics('images/Transform_read.png')
 ```
 
-First, we start with the data frame, `hsb2`, and pipe it into the `mutate()` 
-function. We use the `mutate()` function to create a new variable called
-`read_cat`. Note that we are using a new variable name here, so that we do not 
-overwrite the existing reading score variable, called `read`. 
+Now you see a dataset in Rguroo's **Dataset Viewer** that includes the newly formed variable `read_cat` and the other variables in the `hsb2` dataset. The values of this new variable are simple: if the reading score of the student is below the average reading score, the variable will have the label "below average", otherwise, the label will be "at or above average".
 
-The values of this new variable are simple: if the reading score of the student is below the average reading score, the variable will have the label "below average", otherwise, the label will be "at or above average".
-
-This discretization can be accomplished using the `if_else()` function in R:
+This discretization is accomplished using the `ifelse()` function in R:
 
 - The first argument of the function is the logical test we wish to perform: `read < avg_read`.
-- The second argument is what we want the function to do if the result of the logical test is `TRUE`, in other words, if the student's score is below the average score: `"below average"`.
-- The third argument is what we want the function to do if the result of the logical test is `FALSE`, in other words, if the student's score is above the average score: `"at or above average"`.
+- The second argument is what we want the function to do if the result of the logical test is `TRUE`. In other words, if the student's score is below the average score: `"below average"`.
+- The third argument is what we want the function to do if the result of the logical test is `FALSE`. In other words, if the student's score is above the average score: `"at or above average"`.
+
+Now you can save this dataset with a name such as `hsb2_read_cat`.
+
+```{r, out.width='75%', fig.align='center', fig.cap='*Saving the new dataset as "hsb2_read_cat"*'}
+knitr::include_graphics('images/save_as_hsb2.png')
+```
+
 
 Next, it's your turn to discretize a different variable.
 
@@ -429,144 +350,96 @@ We'll create a categorical version of the `num_char` variable in the `email50` d
 
 The median marks the 50th percentile, or midpoint, of a distribution, so half of the emails should fall in one category and the other half in the other. We will learn more about the median and other measures of center in the next tutorial in this series.
 
-The `email50` dataset is available in your workspace. Modify the code below to:
+The `email50` dataset is available in your Rguroo account. Use the **Transform** function and similar steps as above to create the `num_char` variable. In the Transform function
 
-- Find the median number of characters in emails, save the result to a variable named `med_num_char`.
-- Using `mutate()`, create a new column called `num_char_cat`, which discretizes the `num_char` variable into `"below median"` or `"at or above median"`.
-- Assign the resulting data frame to a new data frame named `email50_updated`.
-- Then, using `count()`, determine the number of emails in each level of `num_char_cat`. Evaluate whether these counts match the expected numbers.
+-  Create a new variable (column) called `num_char_cat`, which discretizes the `num_char` variable into `"below median"` or `"at or above median"`.
+- Find the median number of characters in emails, save the result to a variable named `med_num_char`. To find the median, use the R code $\color{darkblue}{\tt{median(num\_char)}}$.
+- Use the $\color{darkblue}{\tt{ifelse()}}$ function to create `num_char_cat`. 
+- Save the newly formed dataset with the name `email50_updated`.
 
-```{r hsb2-mutate-num-char-cat, exercise=TRUE}
-# Calculate median number of characters: med_num_char
-med_num_char <- median(___)
+Apply the `Dataset Summary` function in Rguroo to `email50_updated` to determine the number of emails in each level of `num_char_cat`. Evaluate whether these counts match the expected numbers.
 
-# Create num_char_cat variable in email50
-email50_updated <- email50 %>%
-  mutate(num_char_cat = if_else(num_char < med_num_char,
-                                "[VALUE IF TRUE]",
-                                "[VALUE IF FALSE]")
-         )
-  
-# Count emails in each category
-email50_updated %>%
-  count(___)
-```
+## Combining levels of a factor
 
+Sometimes we are interested in combining some of the levels of a factor variable. For example, the `email50` dataset has a categorical variable called `number` with levels `"none"`, `"small"`, and `"big"`, but suppose we're only interested in whether an email contains a number.  That is, we want to 
+combine the levels `"some"` and `"big"` into one level labeled `"yes"`, and 
+keep the `"none"` level separate as a level labeled `"no"`. There are three ways to combine levels of a factor variable in Rguroo. One way is to use the **Transform** function to create a new variable that combines the levels as desired; for example, create a new variable  `number_cat` that has levels `"yes"` and `"no"`, as described. A second way is to combine levels in Rguroo's **Level Editor**; we show this when visualizing data in a barplot. Yet a third way is to use Rguroo's **Variable Type Editor**. Here we will cover the first two methods.
 
-```{r hsb2-mutate-num-char-cat-hint-1}
-# Calculate median number of characters: med_num_char
-med_num_char <- median(email50$num_char)
-```
+### Using the Transform function
 
-
-```{r hsb2-mutate-num-char-cat-hint-2}
-# In the `if_else()` function, the second argument is the value `num_char_cat`.
-# If the condition `num_char < med_num_char` it should take `TRUE`,
-# else it should take `FALSE`.
-```
-
-```{r hsb2-mutate-num-char-cat-hint-3}
-# Create num_char_cat variable in email50
-email50_updated <- email50 %>%
-  mutate(num_char_cat = if_else(num_char < med_num_char,
-                                "below median",
-                                "at or above median")
-         )
-```
-
-```{r hsb2-mutate-num-char-cat-hint-4}
-# Count emails in each category
-email50_updated %>%
-  count(num_char_cat)
-```
-
-
-```{r hsb2-mutate-num-char-cat-solution}
-# Calculate median number of characters: med_num_char
-med_num_char <- median(email50$num_char)
-
-# Create num_char_cat variable in email50
-email50_updated <- email50 %>%
-  mutate(num_char_cat = if_else(num_char < med_num_char,
-                                "below median",
-                                "at or above median")
-         )
-  
-# Count emails in each category
-email50_updated %>%
-  count(num_char_cat)
-```
-
-
-### Combining levels of a different factor
-
-Another common way of creating a new variable based on an existing one is by *combining levels of a categorical variable*. For example, the `email50` dataset has a categorical variable called `number` with levels `"none"`, `"small"`, and `"big"`, but suppose we're only interested in whether an email contains a number. Next, we will create a variable containing this information and also visualize it.
-
-For now, do your best to understand the code we've provided to generate the plot. We will go through it in detail in the next section.
-
-In the `email50` dataset, the `number` variable has three levels, `"none"`, 
+As noted earlier, in the `email50` dataset, the `number` variable has three levels, `"none"`, 
 `"some"`, and `"big"`. We want to create a new variable (`number_cat`) that
 combines the levels `"some"` and `"big"` into one level named `"yes"`, and 
 keeps the `"none"` level separate as a level named `"no"`. This should sound
 similar to how we used the `if_else()` function previously, where the logical
 condition we want to check is whether the level of `number` is equal to
-(`==`) `"none"`.  
+(`==`) `"none"`. So use the following steps in the **Transform** function to create the new variable `num_cat`:
 
-Use what you know about the `mutate` and `if_else()` functions to: 
+- Open the `email50` dataset in the **Transform** function, and create a new variable called `number_cat`, which discretizes the `number` variable into `"no"` and `"yes"`.
+- Use the ifelse function so that if the value of the `number` variable is `"none"`, you assign `"no`", and otherwise, you assign `"yes"` to the `number_cat` variable. That is 
+   $\color{darkblue}{\tt{ifelse(number == "none",\  
+                        "[VALUE\ IF\ TRUE]",\  
+                        "[VALUE\ IF\ FALSE]")}}$
+- Save the resulting dataset with the name `email50_updated2`. Note that we had created a dataset named `email50_updated` earlier, and in order not to overwrite that dataset we use the name `email50_updated2`.
 
-- Create a new column in `email50` called `number_cat` which discretizes the
-`number` variable into `"no"` and `"yes"`. 
-- Assign the resulting data frame to a new data frame named `email50_updated`.
-- Run the code provided to visualize the distribution of the `number_cat` variable.
+### Visualizing the num_cat variable
 
-```{r email50-fortified, exercise=TRUE}
-# Create number_cat column in email50
-email50_updated <- email50 %>%
-  mutate(___ = if_else(___, 
-                          "[VALUE IF TRUE]", 
-                          "[VALUE IF FALSE]")
-            )
+We will use the Rguroo **Barplot** function to visualize the values of the variable `number_cat`. Use the following steps to create the barplot:
 
+---
 
- 
-# Visualize the distribution of number_cat
-ggplot(email50_updated, aes(x = number_cat)) +
-  geom_bar()
+1. Open the **_Plots_** toolbox and click on the **Create Plot** dropdown ![Create Plot Dropdown](images/create_plot_dropdown.png).
+
+2. Select `Barplot` from the dropdown menu. This opens the **Barplot** dialog (see the figure below).
+
+3. From the `Dataset` dropdown, select `email50_updated2`.
+
+4. From the `Factor 1` dropdown, select `number_cat`.
+
+5. Click the Preview button ![preview button](images/preview.png). You will see a barplot of the variable `number_cat`.
+
+---
+
+```{r, out.width='80%', fig.align='center', fig.cap='*Using Rguroo\'s Barplot function to create a barplot of the variable number_cat*'}
+knitr::include_graphics('images/barplot_number_cat.png')
 ```
 
-```{r email50-fortified-hint-1}
-number_cat = if_else(number == "none", 
-                     "[VALUE IF TRUE]", 
-                     "[VALUE IF FALSE]") 
+### Using Rguroo's Level Editor
+
+In the previous section, we used the **Transform** function to create the new variable `number_cat` and the dataset `email_updated2` to combine the levels of the factor `number`. In Rguroo, you can use the **Level Editor** within a function to combine levels of a factor without creating a new variable or a new  dataset. For example, suppose that using the `email50` dataset, we want to, again, combine the levels `"some"` and `"big"` into one level labeled `"yes"` and 
+keep the `"none"` level separate as a level labeled `"no"` when creating a barplot. Use the following steps to see how the **Level Editor** works:
+
+---
+
+1. Open the **_Plots_** toolbox and click on the **Create Plot** dropdown ![Create Plot Dropdown](images/create_plot_dropdown.png).
+
+2. Select `Barplot` from the dropdown menu. This opens the **Barplot** dialog.
+
+3. From the `Dataset` dropdown, select `email50`.
+
+4. From the `Factor 1` dropdown, select the variable `number`.
+
+5. Click on the **Level Editor** button ![level editor button](images/level_editor2.png). The **Factor Level Editor** dialog opens.
+
+6. Use the following steps in the **Level Editor** to combine the levels of `big` and `small` (see the figure below):
+  6.1 Select `number` from the `Factor` column. The levels of the `number` appear in the `Level` column.    
+  6.2 Simultaneously select the levels `big` and `small` in the `Level` column.      
+  6.3 In the `Label` textbox on the right column, type in $\color{darkblue}{\tt{yes}}$. This combines the levels `big` and `small` and labels the combined level `yes`.
+
+7. Select the level `none` and in the `Label` textbox on the right column, type in  $\color{darkblue}{\tt{no}}$. This will relabel `none`e as `no` (see figure below).
+
+5. Click the Preview button ![preview button](images/preview.png). You will see a barplot of the variable `number` with the combined levels `yes` and `no`.
+
+---
+
+```{r, out.width='90%', fig.align='center', fig.cap='*Using Rguroo\'s Level Editor to combine and relabel factor levels*'}
+knitr::include_graphics('images/Level_editor_combine.png')
 ```
 
-```{r email50-fortified-hint-2}
-number_cat = if_else(number == "none", 
-                     "no", 
-                     "[VALUE IF FALSE]") 
-```
 
-```{r email50-fortified-hint-3}
-number_cat = if_else(number == "none", 
-                     "no", 
-                     "yes") 
 
-```
 
-```{r email50-fortified-solution}
-# Create number_cat column in email50
-email50_updated <- email50 %>%
-  mutate(number_cat = if_else(number == "none",
-                              "no", # if number is "none", make number_cat "no"
-                              "yes" # if number is not "none", make number_cat "yes"
-                              )
-         )
-   
- 
-# Visualize the distribution of number_cat
-ggplot(email50_updated, aes(x = number_cat)) +
-  geom_bar()
-```
+
 
 ## Visualizing numerical data
 
