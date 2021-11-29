@@ -428,7 +428,7 @@ keep the `"none"` level separate as a level labeled `"no"` when creating a barpl
 
 7. Select the level `none` and in the `Label` textbox on the right column, type in  $\color{darkblue}{\tt{no}}$. This will relabel `none`e as `no` (see figure below).
 
-5. Click the Preview button ![preview button](images/preview.png). You will see a barplot of the variable `number` with the combined levels `yes` and `no`.
+8. Click the Preview button ![preview button](images/preview.png). You will see a barplot of the variable `number` with the combined levels `yes` and `no`.
 
 ---
 
@@ -436,127 +436,115 @@ keep the `"none"` level separate as a level labeled `"no"` when creating a barpl
 knitr::include_graphics('images/Level_editor_combine.png')
 ```
 
-
-
-
-
-
 ## Visualizing numerical data
 
 The most logical and most useful first step of any data analysis is an exploratory analysis. And a very important and informative component of exploratory data analysis is visualization.
 
-We will learn a lot more about data visualization in the tutorial on Summarizing and Visualizing Data, so we won't go into too much detail on data visualization in this tutorial. Let's, however, make a simple scatterplot to visualize the relationship between two numerical variables so that you can get some exposure to constructing plots in R and how to interpret them.
+We will learn a lot more about data visualization in the tutorial on Summarizing and Visualizing Data, so we won't go into too much detail on data visualization in this tutorial. Let's, however, make a simple scatterplot to visualize the relationship between two numerical variables so that you can get some exposure to constructing plots in Rguroo and how to interpret them.
 
-There are many methods for visualizing data in R, but in this tutorial we will focus on using the ggplot2 package, which is part of the tidyverse.
+It is simple to make a basic plot in Rguroo. You can create a graph simply by selecting your graph type, selecting your dataset, choosing your variable(s), and clicking the `Preview` button ![preview button](images/preview.png). Fortunately, Rguroo has many options that can used easily to make sophisticated plots. Every plot includes a **Basics** dialog and a **Details** dialog that you can access by clicking on the ![basics button](images/basics2.png) and ![basics button](images/details2.png) buttons. In the Details dialog, you have many options to customize each layer of your plot, including the axes, legends, etc. Here we will create a basic bivariate plot.
 
-We chose ggplot2 because this package makes *modern looking hassle-free plots* that take care of fiddly details like drawing legends.
+We'll visualize the relationship between the math and science scores of the students in the High School and Beyond dataset. Use the following steps to create the plot :
 
-Additionally, once you learn how to make simple bivariate plots, with ggplot2 it is easy to extend your code to create a visualization that displays the relationship between many variables at once without having to learn too much more syntax.
 
-Another attractive feature of ggplot2 is that you can build your plots in layers, e.g. you can start with a layer showing the raw data and then add layers of annotations and statistical summaries. This is an attractive feature for learning the syntax, as we can go step-by-step, starting with a simple plot and slowly building up to more complex ones.
+---
 
-We'll visualize the relationship between the math and science scores of the students in the High School and Beyond dataset.
+1. Open the **_Plots_** toolbox and click on the **Create Plot** dropdown ![Create Plot Dropdown](images/create_plot_dropdown.png) (see figure below).
 
-```{r hsb2-science-math, exercise=TRUE}
-ggplot(data = hsb2, aes(x = science, y = math)) + 
-  geom_point()
+2. Select `Scatterplot` from the dropdown menu. This opens the **Scatterplot** dialog.
+
+3. From the `Predictor (x)` dropdown, select `science`.
+
+4. From the `Response (y)` dropdown, select the variable `math`.
+
+5. Click the Preview button ![preview button](images/preview.png). You will see a scatterplot of the variable `math` versus `science`.
+
+---
+
+```{r, out.width='70%', fig.align='center', fig.cap='*Using Rguroo\'s Scatterplot function to graph math versus science in hsb2 data *'}
+knitr::include_graphics('images/scatterplot_math_science_dialog.png')
 ```
 
-Let's pause for a moment and review what's going on in the code above.
+By right-clicking on a plot that you create in Rguroo, you can copy-paste it in other applications, for example, Word or Google Doc, or save it to your local computer. The default format of the plots in Rguroo is "SVG," standing for Scalable Vector Graphics. The advantage of using this format is that you won't lose resolution if you resize the plots. If you like to have your graphs in other formats such as png, jpeg, etc., you can change the format in the **Details** dialog.
 
-- We use the `ggplot()` function to create plots.
-- The first argument is the data frame containing the data we wish to plot: `data = hsb2`.
-- In the `aes`thetics argument, we map variables from the data frame to certain components of the plot. In this case we want to plot science test scores on the x and math test scores on the y axis: `aes(x = science, y = math)`.
-- Lastly, we specify what `geom`etric shapes should be used to represent each observation. In this case, we want to make a scatterplot, so we want each observation to be represented by a "point" on the plot, hence we add use the `geom_point()` function to add a points layer to the plot.
+You can also save your plot in Rguroo. Once you save a plot in Rguroo, it gets saved under the **Plots** toolbox area, and you can come back to it anytime. By simply double-clicking on the name, you get the dialog exactly where you left off, and you can modify your plot, if you wish. Let's save the scatterplot that we created with the name *"Math Vs Science"*. To do so, on the `Save As` textbox on top-right, type in $\color{darkblue}{\tt{Math\ Vs\ Science}}$.
 
-In summary, the main function is `ggplot()`, the first argument is the data to use, then the aes maps the variables to certain features of the plot, and finally the geom informs the type of plot you want to make.
-
-Another important aspect to note here is that the `geom_XXX()` function is separated from the `ggplot()` function with a plus, `+`. As we mentioned earlier, ggplot2 plots are constructed in series of layers. The plus sign separates these layers. Generally, the `+` sign can be thought of as the end of 
-a line, so you should always hit enter/return after it. While it is not mandatory to move to the next line for each layer, doing so makes the code a lot easier to organize and read. So, we will follow this structure in this tutorial and we strongly recommend you do so whenever you're making plots with ggplot2.
-
-Now that you've learned how to make the plot, let's talk about what the plot says.
 
 ### Interpreting a visualization
 
-We can see that there is a positive relationship between the science and math scores of students, meaning that students who score highly in science tend to also score highly in math. Probably not that surprising a result.
+The following is the scatterplot of math versus science that you created. 
 
-```{r hsb2-science-math-lm}
-ggplot(data = hsb2, aes(x = science, y = math)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
+```{r, out.width='80%', fig.align='center', fig.cap='*Scatterplot of math versus science variables in hsb2 data *'}
+knitr::include_graphics('images/scatterplot_math_science.svg')
 ```
 
-We also mentioned earlier that extending from bivariate to multivariate plots is easy in ggplot2. Let's test that out!
+
+We can see that there is a positive relationship between the science and math scores of students, meaning that students who score highly in science tend to also score highly in math. Probably not that surprising a result.
+
+Now, extending from bivariate to multivariate plots is easy in Rguroo. Let's test that out!
 
 ### Math, science, and program
 
-Let's plot the same math and science test scores, but this time let's also consider the program that the student is in: general, academic, or vocational. 
+Let's plot the same math and science test scores, but this time let's also consider the program that the student is in: general, academic, or vocational. Let's also add summarizing lines, called least squares or LS lines, to the plot.
 
-```{r hsb2-science-math-prog, exercise=TRUE}
-ggplot(data = hsb2, aes(x = science, y = math, color = prog)) +
-  geom_point()
+We are going to continue from where we left off with the scatterplot in Rguroo, and follow steps 6 and 7 shown below. . If you still have the plot open, click on the ![Basics Button](images/basics2.png) button to open the **Basics** dialog. If you have closed the graph, you can double-click on the name of the graph *"Math Vs Science"* that you saved your plot, and this will open the **Basics dialog. Of course, you can start from scratch and go through steps 1 to 5 above, and then continue with the following instructions.
+
+---
+
+6. In the `Factor` dropdown, select `prog`.
+
+7. In the **Superimpose Section**, select the checkbox `LS Line by Factor`.
+
+8. Click the **Preview** button ![preview button](images/preview.png).
+
+---
+
+As you can see in the figure below, Choosing the `prog` in the  `Factor` dropdown resulted in points on the scatterplot that distinguish the levels of the variable `prog`  by different colors and different plot characters. Checking the option `LS line by Factor` produces an LS line for each level of the selected factor.
+
+```{r, out.width='70%', fig.align='center', fig.cap='*Using Rguroo\'s Scatterplot of math versus science by program for the hsb2 data *'}
+knitr::include_graphics('images/scatterplot_math_science_prog.svg')
 ```
 
-The code looks very similar to what we used before, except that we now have one other aesthetic mapping between the program variable and the `color` of the points that represent the observations. Note that we type the name of the variable as it appears in the data frame: `prog`.
-
-How does the plot below differ from the plot above? Look at the plot above and 
-think about where the lines would go if we fit a separate line for each level
-of the program variable (each color of points). The result would be a plot that
-looks like the one below. 
-
-```{r hsb2-science-mat-prog-lm}
-ggplot(data = hsb2, aes(x = science, y = math, color = prog)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE)
-```
-
-The same positive relationship between math and science scores is still apparent. But we can also see that students in academic programs, shown with green points, tend to have higher math scores relative to their science scores than those in vocational programs, in blue, and general programs, in red.
+The same positive relationship between math and science scores is still apparent. But we can also see that students in academic programs, shown with blue points, tend to have higher math scores relative to their science scores than those in vocational programs, in green, and general programs, in orange.
 
 We will wrap up this lesson with some practice creating a similar plot with different variables.
 
 ### Visualizing numerical and categorical data
 
-Next we'll visualize the relationship between two numerical variables from the `email50` dataset, separated by whether or not the email was spam. This means that we will use an aspect of the plot (like color or shape) to identify the levels in the `spam` variable so that we can compare plotted values between them.
+Next, we'll visualize the relationship between two numerical variables from the `email50` dataset, separated by whether or not the email was spam. This means that we will use an aspect of the plot (like color and shape) to identify the levels in the `spam` variable so that we can compare plotted values between them.
 
-Recall that in the `ggplot()` function, the first argument is the dataset, then we map the aesthetic features of the plot to variables in the dataset, and finally the `geom_XXX()` layer informs how data are represented on the plot.
+If you open Rguroo's **Scatterplot** function and select the `email50` dataset, you won't see the variable `spam` in the `Factor` dropdown. This is because the variable `spam` is classified as a numerical variable having values of 0's and 1's; a 0 stands for "no," a 1 stands for "yes." So, we need to change the type of the variable `spam` from numerical to factor (categorical).
 
-Next, we will make a scatterplot by adding a `geom_point()` layer to the `ggplot()` call.
+The **Variable Type Editor** function in Rguroo allows you to change the type of a variable from numerical to factor. Use the following steps to change the variable `spam` from numerical to factor:
+
+---
+
+1. Under the **Data** toolbox, right-click on the name of the  `email50` dataset. This opens a context menu. 
+
+2. Select the **Variable Type Editor** option to open the **Variable Type Editor** (see figure below).
+
+3. Select the variable `spam` from the `Numerical` column, and drag it to the `Factor/Categorical` column.
+
+4. Click on the `Update` button.
+
+5. Select the `spam` variable under the `Factor/Categorical` column. You will see the levels 0 and 1.
+
+6. Double click next to 0 and 1 under the `Label` column, and type the labels $\color{darkblue}{\tt{no}}$ and $\color{darkblue}{\tt{yes}}$, respectively.
+ 
+7. Click on the `Update` and `Close` buttons in that order.
+
+---
+
+```{r, out.width='90%', fig.align='center', fig.cap='*Using the Variable Type Editor to change the variable type of spam from numerical to factor *'}
+knitr::include_graphics('images/variable_type_editor.png')
+```
+
+Now you are ready to draw the scatterplot!
 
 - Create a scatterplot of number of exclamation points (`exclaim_mess`) on the y-axis vs. number of characters (`num_char`) on the x-axis.
-- Color points by whether or not the email is `spam`.
+- Color points by whether or not the email is `spam`. This is done automatically if you select the `spam` variable in the `Factor` dropdown.
 
-Note that when you first make the plot, you will see a color gradient in place 
-of where you expected to see a legend like before. This gradient appears because
-`spam` is stored as a numerical variable (0 = no, 1 = yes). But, we want to use
-it as a categorical variable in this plot. To do this we can force R to think of
-`spam` as a factor, by temporarily converting it to a factor inside the `ggplot`. 
-To do this we insert the name of the variable we want to convert to a factor 
-(`spam`) into the the `factor()` function (e.g. `factor(spam)`). 
-
-```{r email50-plot, exercise=TRUE}
-ggplot(email50, aes(x = ___, y = ___, color = ___)) +
-  [GEOM]
-```
-
-```{r email50-plot-hint-1}
-ggplot(email50, aes(x = num_char, y = ___, color = ___)) +
-  [GEOM]
-```
-
-```{r email50-plot-hint-2}
-ggplot(email50, aes(x = num_char, y = exclaim_mess, color = ___)) +
-  [GEOM]
-```
-
-```{r email50-plot-hint-3}
-ggplot(email50, aes(x = num_char, y = exclaim_mess, color = factor(spam))) +
-  {GEOM}
-```
-
-```{r email50-plot-solution}
-ggplot(email50, aes(x = num_char, y = exclaim_mess, color = factor(spam))) +
-  geom_point()
-```
+(Optional) If you wish to change the color of the points for each level, you can click on the ![Level editor](images/level_editor2.png) button, select `spam`, and in the `Label & Color` section, select a color of your choice for each level. Also, if you like to reorder the levels yes and no, you can move the levels by drag and drop. You can explore other attributes that you can change in the **Level Editor**.
 
 *Based on the plot, does there appear to be a relationship between these variables?* 
 
