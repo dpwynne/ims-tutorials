@@ -119,89 +119,101 @@ quiz(
   caption = "")
 ```
 
-## Sampling in R
+## Sampling in Rguroo
 
-In this section, we'll practice sampling in R.
+In this section, we'll practice sampling in Rguroo.
 
-Suppose we want to collect data from counties in the United States, but we do not have the resources to obtain these data from all counties. Conveniently, however, we do have a list of all counties. This is publicly available information and is contained in the `county` dataset in the **usdata** package. You can read more about the data [here](https://openintrostat.github.io/usdata/reference/county.html). 
+Suppose we want to collect data from counties in the United States, but we do not have the resources to obtain these data from all counties. Conveniently, however, we do have a list of all counties. This is publicly available information and is available  in the `county` dataset in  Rguroo's **OpenIntro** dataset repository. You can read more about the data by clicking on the information icon ![information icon](images/info.png) in the dataset repository or [here](https://openintrostat.github.io/usdata/reference/county.html). 
 
 ### Setup
 
-So, let's start by loading the necessary packages with the `library()` function. We need the **usdata** package for the relevant data frame and the **tidyverse** package for the sampling and grouping functions we'll introduce shortly.
+So, let's start importing the `county` data from the **OpenIntro** dataset repository. 
 
-```{r load-packages, exercise=TRUE}
-library(usdata)
-library(tidyverse)
+This dataset contains data from counties in all 50 states plus the District of Columbia, or DC, as it's commonly referred to. Since DC is not a state by definition, we'll first remove it from the dataset. We can do this by using Rguroo's  **Subset**  function in the *_Data_* toolbox, as we learned earlier in these tutorials.
+
+That is, we will create a new dataset, called `county_noDC`, that removes the single case corresponding to $\color{blue}{\tt District\ of\ Columbia}$ from the `county` dataset. To do so, in the **Subset** function, select the `county` dataset, and click on `Logical Expression` to create the logical expression ``` state != 'District of Columbia'```, as shown in the figure below. 
+Notice that to do so, you use `!=`. You can think of the `!` as negating what comes after it. Here, the `!` negates the `=` sign, meaning we want the `state` to **not** be equal to the District of Columbia. When you are done, save the resulting dataset  with the name `county_noDC`.
+
+```{r, out.width='80%', fig.align='center', fig.cap='*Logical expression to remove District of Columbia*'}
+knitr::include_graphics('images/subset_noDC.png')
 ```
 
-Next we'll work with the `county` data from the usdata package.
-
-This data frame contains data from counties in all 50 states plus the District of Columbia, or DC, as it's commonly referred to. Since DC is not a state by definition, we'll first remove it from the dataset. We can do this with the `filter()` function that you learned about earlier in these tutorials.
-
-That is, we will create a new data frame, called `county_noDC` that `filter()`s out the observation where state is DC. Notice that to filter DC out of the data frame we are using `!=`. You can think of the `!` as negating what comes after it. Here, the `!` negates the `=` sign, meaning we want the `state` to **not** be equal to the District of Columbia. 
-
-We'll also `droplevels()` for good measure, so that the level District of Columbia is removed completely from the data frame.
-
-```{r remove-dc, exercise=TRUE}
-county_noDC <- county %>%
-  filter(state != "District of Columbia") %>%
-  droplevels()
-```
+If you don't want to use the **Subset** function, you can directly import the dataset `county_noDC` from the **OpenIntro** dataset repository!
 
 ### Simple random sample
 
 Suppose our limited resources require that we collect data from only _150_ of the over _3000_ counties in the United States.
 
-One option is to take a simple random sample. We will use the `slice_sample()` function in dplyr (a package included in the tidyverse) to do this.
+One option is to take a simple random sample. We will use the **Random Selection** function in Rguroo's  **_Probability-Simulation_** toolbox to do this. Use the following steps to select a simple random sample of size 50:
 
-We start with the `county_noDC` data frame and pipe it into the `slice_sample()` function, setting the size (`n`) argument to 150. We will call the data frame containing this simple random sample *`county_srs`*.
+1. Under the **_Probability-Simulation_** toolbox, click on the $\color{blue}{\tt Probability}$ dropdown ![probability dropdown](images/probability_dropdown.png) and select $\color{blue}{\tt Random\ Selection}$. The **Dataset Random Selection** dialog opens (see figure below).
 
-```{r random-sample, exercise=TRUE}
-# Simple random sample of 150 counties
-county_srs <- county_noDC %>%
-  slice_sample(n = 150)
+2. From the `Dataset` dropdown, select $\color{blue}{\tt county\_noDc}$.
 
-# Glimpse
-glimpse(county_srs)
+3. In the `Sample Size` textbox, type $\color{blue}{\tt 150}$ to specify your desired sample size.
+
+4. From the `Replace` radio buttons, select $\color{blue}{\tt Without}$, so sampling is done without replacement.
+
+5. Click on the `Preview` button ![preview button](images/preview.png).
+
+6. In the `Save Dataset As ...` textbox, type $\color{blue}{\tt county_srs}$ to save the created dataset (sample). 
+
+```{r, out.width='80%', fig.align='center', fig.cap='*Random Selection dialog to select a sample of size 150 from the county_noDC data*'}
+knitr::include_graphics('images/GUI_Random_selection.png')
 ```
 
-A quick `glimpse()` shows that there are indeed _150_ observations in this data frame. Note that your sample will look different than someone else's sample, even though you're running the exact same code. We are taking a random sample here, so your sample will be different than mine, just by random chance. However, the sample size should be the same since that is something we specified in the `slice_sample()` function.
+There are two options of `Save As ...` and `Save Dataset As ...` for saving the random sample result. If you use the  `Save As ...` option, then your dialog with the values that you filled in the dialog gets saved under the **_Probability-Simulation_** section, and you can come back to it if you close the tab or log out. If you use the option `Save Dataset As ...`, then the generated data gets saved under the **_Data_** toolbox, and it can be used in other Rguroo functions.
+
+
+As you can see in the **Data Viewer**, there are indeed _150_ observations in the dataset *`county_srs`*. Note that there is an option for selecting a `Seed` in the **Random Selection** dialog. Seed is a number that is used to initialize the random generator. As long as you keep the same seed, you will get the same sample in repeated previews. You can select any number of your choice for the seed. If you erase the number in the `Seed` textbox and keep the textbox blank, you will get a different sample every time you click the the `Preview` button.
+
 
 ### SRS state distribution
 
-If our goal was to take a sample of any 150 counties, we have accomplished this goal. However, if we wanted to obtain equal numbers of counties from each state (that is, three counties per state) a simple random sample won't ensure that.
-
-We can confirm this by counting the number of counties per state. 
-
-To do so we will start with the `county_srs` data frame: first group these data by state, then count the number of observations per state.
-
-```{r random-sample3, exercise=TRUE}
-# State distribution of SRS counties
-county_srs %>%
-  group_by(state) %>%
-  count()
-```
-
-The resulting output shows that this sampling approach yielded data from less than _50_ states and the number of counties sampled varies from state to state.
+If our goal was to take a sample of any 150 counties, we have accomplished this goal. However, if we wanted to obtain equal numbers of counties from each state (that is, three counties per state), a simple random sample won't ensure that. We can confirm this by counting the number of counties per state in Rguroo's **Tabulation** function. Alternatively, if you right-click on the dataset name `county_srs` and select $\color{blue}{\tt Datset\ Summary}$, in the *Categorical Variables* table, you will see that the number of cases for states varies.
 
 If we instead want to sample three counties per state to make up our sample of 150 counties, we should use stratified sampling.
 
 ### Stratified sample
 
-The code looks very similar to how we selected the simple random sample, except that *before* sampling we __first__ group by state and __then sample__ three observations per group.
+To get a stratified sample in Rguroo, we use the **Transformation** function in the **_Data_** toolbox. Specifically, to get a sample of size 3 from each state, use the following instructions:
 
-A quick glimpse at the resulting data frame confirms that we indeed have _150_ observations in this sample.
+1. Under the **_Data_** toolbox, click on the Functions dropdown ![functions dropdown](images/functions_dropdown.png), and select $\color{blue}{\tt Transform}$. This will open the **Data Transform** dialog (see figure below).
 
-```{r stratified-sample, exercise=TRUE}
-# Stratified sample of 150 counties, each state is a stratum
-county_str <- county_noDC %>%
-  group_by(state) %>%
-  slice_sample(n = 3)
+2. From the `Dataset` dropdown, select `county_noDC`.
 
-# Glimpse
-glimpse(county_str)
+3. Drag-and-drop all the variables from the `Returned Variab` column to `Excluded Variable` column.
+
+4. On the `Variable` column, click the plus icon ![plus icon](images/add.png). A textbox appears with the word *Transform_1* as default. Change the name to a word of your choice, for example,  $\color{blue}{\tt county\_selected}$.
+
+5. In the middle panel, write the following R code:
+```{r, eval=FALSE, echo = TRUE}
+set.seed(100)
+
+select =  tapply(name, state, FUN = sample, size = 3)
+
+s = plyr::ldply(select, data.frame)
+
+as.character(s[,2])
 ```
 
+6. Click the Preview button ![preview button](images/preview.png).
+
+7. In the `Save As` textbox, type $\color{blue}{\tt county\_stratified}$ to save the dataset.
+
+```{r, out.width='90%', fig.align='center', fig.cap='*Using the Transform function to obtain a stratified random sample*'}
+knitr::include_graphics('images/GUI_transform_stratified.png')
+```
+
+You can see the names of the selected counties in the Rguroo **Data Viewer**. As expected, there are _150_ counties; three per county.
+
+Let's understand some of the steps and the R code that you wrote in the **Transform** function to obtain the stratified random sample. In Step 3 we remove all the variables to only include the new variables (sample) that we create. In Step 4, you give a name for the variable that you will create as a result of your sampling. 
+
+Now, the R code in Step 5: In the first line, you set the seed for the random generator (this is optional). The second line uses R's `sample` function in the `tapply` function to take the stratified random sample. Specifically, the first argument of `tapply` is the variable _name_ that consists of the county names. The second argument is the variable _state_ that contains the name of the states, which is our stratification variable. The third argument is the name of the function `sample` that is used in R to take random sample. Finally, the fourth argument is the sample size. This `tapply` function produces a list of states and names of the three selected counties for each state.
+
+The line that uses the `plyr` function changes what `tapply` produces to a data frame, with its first column being the name of states and its second column being the name of the selected counties. The last line of R code picks the second column of the dataset, and this is the value that is assigned to the variable `county_selected`. 
+
+Note that the result from the code that is written in the **Transform** function must be a single variable that is assigned to the name that you select for that variable. So, if you like to add another variable to your dataset that also includes the name of the states, click on the plus sign ![plus sign](images/add.png) to add another variable, call it $\color{blue}{\tt states}$. Then copy and paste the same code as `county_selected`. Only change the last line to `as.character(s[,1])`, since the name of the states is in the first column of the dataset that is generated by the `tapply` function.
 Now it's your turn to take a sample!
 
 ### Exercise: Simple random sample in R
